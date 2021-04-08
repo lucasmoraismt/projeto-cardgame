@@ -12,27 +12,30 @@ function start() {
         number = parseInt(prompt("Quantas cartas deseja? (4 a 14)"));
     }
 
-    for (let i = 0; i < number; i++) {
-        display.innerHTML += `<li onclick="select(this)"><img src="media/front.png" alt="Carta ${i + 1}"></li>`;
-    }
-
     for(a = 0; a < (number / 2); a++) {
         selectedList.push(list[a]);
         selectedList.push(list[a]);
     }
-    
+
     selectedList.sort(random);
+
+    for (let i = 0; i < number; i++) {
+        display.innerHTML += `<li class="${selectedList[i]}" onclick="select(this)"><img src="media/front.png" alt="Carta ${i + 1}"><img class="gif" src="media/${selectedList[i]}.gif" alt="Gif ${i + 1}"></li>`;
+    }
+
 }
 
 function select(card) {
-    let cardBack = card.querySelector("img");
+    let backimg = card.querySelector("img");
 
-    if(card.classList[0] !== "first") {
+    if(card.classList[1] === undefined) {
+        
         if(b < number) {
-            card.classList.add("first");
-            cardBack.setAttribute('src',`media/${selectedList[b]}.gif`);
+            card.classList.add("open");
+            backimg.classList.add("turnedimg");
             b++;
         }
+
     }
 }
 

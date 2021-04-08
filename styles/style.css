@@ -18,35 +18,51 @@ ul {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    width: 65%;
+    margin: 0px auto;
 }
 
-li {
+ul li {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 140px;
     height: 175px;
     background-color: #A7E9AF;
-    margin: 0px 15px 35px;
+    margin: 0px 12px 30px;
     border: 1px solid #99CEA8;
     border-radius: 5px;
+    position: relative;
 }
 
-li img {
+ul li img {
     width: 110px;
     height: 110px;
 }
 
-li:last-child {
-    margin-right: 0px;
+.gif {
+    position: absolute;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
 }
 
-.first {
+.turnedimg {
+    backface-visibility: hidden;
+}
+
+.open {
     transform: rotateY(180deg);
     transition: transform 0.5s;
     transform-style: preserve-3d;
 }
 
+.match {
+
+}
+
+.unmatched {
+
+}
 @media (max-width: 600px) {
     h1 {
         font-size: 36px;
