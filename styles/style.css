@@ -46,7 +46,7 @@ ul li img {
     backface-visibility: hidden;
 }
 
-.turnedimg {
+.turned-img {
     backface-visibility: hidden;
 }
 
@@ -56,13 +56,6 @@ ul li img {
     transform-style: preserve-3d;
 }
 
-.match {
-
-}
-
-.unmatched {
-
-}
 @media (max-width: 600px) {
     h1 {
         font-size: 36px;

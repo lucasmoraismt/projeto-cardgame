@@ -2,7 +2,10 @@ const list = ["bobrossparrot", "explodyparrot", "fiestaparrot", "metalparrot", "
 let number = prompt("Quantas cartas deseja? (4 a 14)");
 number = parseInt(number, 10);
 const selectedList = [];
-let b = 0;
+
+let count = 0;
+let victory = 0;
+let clickedCard = null;
 
 function start() {
     let display = document.querySelector("ul");
@@ -20,26 +23,48 @@ function start() {
     selectedList.sort(random);
 
     for (let i = 0; i < number; i++) {
-        display.innerHTML += `<li class="${selectedList[i]}" onclick="select(this)"><img src="media/front.png" alt="Carta ${i + 1}"><img class="gif" src="media/${selectedList[i]}.gif" alt="Gif ${i + 1}"></li>`;
+        display.innerHTML += `<li id="${selectedList[i]}" onclick="select(this)">
+                                    <img src="media/front.png" alt="Carta ${i + 1}">
+                                    <img class="gif" src="media/${selectedList[i]}.gif" alt="Gif ${i + 1}">
+                                </li>`;
     }
 
 }
 
 function select(card) {
-    let backimg = card.querySelector("img");
+    let backImg = card.querySelector("img");
 
-    if(card.classList[1] === undefined) {
-        
-        if(b < number) {
-            card.classList.add("open");
-            backimg.classList.add("turnedimg");
-            b++;
-        }
-
+    if(card.classList[0] === undefined) {
+        card.classList.add("open");
+        backImg.classList.add("turned-img");
     }
+
+    if(clickedCard === null) {
+        clickedCard = card;
+    } else if(card.id !== clickedCard.id) {
+        setTimeout(togle, 1000, card, clickedCard);
+        clickedCard = null;
+    } else {
+        clickedCard = null;
+        victory++
+    }
+
+    count++;
+    win();
 }
 
 start();
+
+function togle(card1, card2) {
+    card1.classList.remove("open");
+    card2.classList.remove("open");
+}
+
+function win() {
+    if(victory == (number / 2)) {
+        setTimeout(alert, 50, `Parabéns! Você ganhou em ${count / 2} jogadas`);
+    }
+}
 
 function random() {
     return Math.random() - 0.5;
