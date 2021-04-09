@@ -28,10 +28,14 @@ function start() {
                                     <img class="gif" src="media/${selectedList[i]}.gif" alt="Gif ${i + 1}">
                                 </li>`;
     }
-
 }
+start();
 
 function select(card) {
+    if (card === clickedCard) {
+        return;
+    }
+
     let backImg = card.querySelector("img");
 
     if(card.classList[0] === undefined) {
@@ -46,14 +50,12 @@ function select(card) {
         clickedCard = null;
     } else {
         clickedCard = null;
-        victory++
+        victory++;
     }
 
     count++;
     win();
 }
-
-start();
 
 function togle(card1, card2) {
     card1.classList.remove("open");
@@ -62,7 +64,16 @@ function togle(card1, card2) {
 
 function win() {
     if(victory == (number / 2)) {
-        setTimeout(alert, 50, `Parabéns! Você ganhou em ${count / 2} jogadas`);
+        setTimeout(reload, 50);
+    }
+}
+
+function reload() {
+    alert(`Parabéns! Você ganhou em ${count / 2} jogadas`);
+    let again = (window.confirm("Deseja jogar novamente?"));
+    
+    if(again) {
+        document.location.reload(true);
     }
 }
 
